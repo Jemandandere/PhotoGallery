@@ -6,10 +6,10 @@
     app:startDestination="@id/albumListRemoteFragment">
 
     <fragment
-        android:id="@+id/albumDetail"
-        android:name="com.jemandandere.photogallery.ui.fragment.albumDetail.AlbumDetailFragment"
-        android:label="@string/title_detail"
-        tools:layout="@layout/album_detail_fragment" />
+        android:id="@+id/photoListFragment"
+        android:name="com.jemandandere.photogallery.ui.fragment.photoList.PhotoListFragment"
+        android:label="@string/title_album"
+        tools:layout="@layout/photo_list_fragment" />
     <fragment
         android:id="@+id/geoTrackFragment"
         android:name="com.jemandandere.photogallery.ui.fragment.geoPosition.GeoPositionFragment"
@@ -21,8 +21,8 @@
         android:label="@string/title_library"
         tools:layout="@layout/album_list_local_fragment">
         <action
-            android:id="@+id/action_albumListLocalFragment_to_albumDetail"
-            app:destination="@id/albumDetail" />
+            android:id="@+id/action_albumListLocalFragment_to_photoListFragment"
+            app:destination="@id/photoListFragment" />
     </fragment>
     <fragment
         android:id="@+id/albumListRemoteFragment"
@@ -30,7 +30,7 @@
         android:label="@string/title_home"
         tools:layout="@layout/album_list_remote_fragment">
         <action
-            android:id="@+id/action_albumListRemoteFragment_to_albumDetail"
-            app:destination="@id/albumDetail" />
+            android:id="@+id/action_albumListRemoteFragment_to_photoListFragment"
+            app:destination="@id/photoListFragment" />
     </fragment>
 </navigation>

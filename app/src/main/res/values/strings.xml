@@ -1,10 +1,10 @@
 <resources>
     // Заголовки
-    <string name="app_name">MusicBox</string>
+    <string name="app_name">PhotoGallery</string>
     <string name="title_home">Главная</string>
     <string name="title_library">Библиотека</string>
     <string name="title_position">Позиция</string>
-    <string name="title_detail">Детали</string>
+    <string name="title_album">Альбом</string>
 
     //
 </resources>
