@@ -1,20 +1,15 @@
 package com.jemandandere.photogallery.adapter
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.jemandandere.photogallery.R
 import com.jemandandere.photogallery.data.model.Album
 import com.jemandandere.photogallery.databinding.AlbumItemBinding
-import com.jemandandere.photogallery.util.Constants
-import okio.blackholeSink
 
-class AlbumListAdapter() : RecyclerView.Adapter<AlbumListAdapter.AlbumListHolder>() {
+class AlbumListAdapter(private val onClick: (Album) -> Unit) : RecyclerView.Adapter<AlbumListAdapter.AlbumHolder>() {
 
     private var albumList = emptyList<Album>()
 
@@ -23,32 +18,29 @@ class AlbumListAdapter() : RecyclerView.Adapter<AlbumListAdapter.AlbumListHolder
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumListHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.album_item, parent, false)
-        return AlbumListHolder(view)
+        return AlbumHolder(view)
     }
 
-    override fun onBindViewHolder(holder: AlbumListHolder, position: Int) {
-        holder.bind(albumList[position])
+    override fun onBindViewHolder(holder: AlbumHolder, position: Int) {
+        holder.bind(albumList[position], onClick)
     }
 
     override fun getItemCount(): Int = albumList.size
 
-    class AlbumListHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class AlbumHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private lateinit var album: Album
 
         private val binding = AlbumItemBinding.bind(view)
         private val title: TextView = binding.albumItemTitle
 
-        fun bind(album: Album) {
+        fun bind(album: Album, onClick: (Album) -> Unit) {
             this.album = album
             this.title.text = album.title
-
             itemView.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putInt(Constants.ALBUM_ID_KEY, album.id)
-                Navigation.findNavController(itemView).navigate(R.id.action_albumListRemoteFragment_to_photoListFragment, bundle)
+                onClick(album)
             }
         }
     }

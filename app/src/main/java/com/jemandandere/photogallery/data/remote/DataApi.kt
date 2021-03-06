@@ -7,11 +7,12 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
-interface AlbumApi {
+interface DataApi {
     @GET(Constants.ALBUM_LIST_PATH)
     fun getAlbumList(): Observable<List<Album>>
 
     @GET(Constants.PHOTO_LIST_PATH)
-    fun getPhotoList(@Path("albumId") albumId: Int): Observable<List<Photo>>
+    fun getPhotoList(@Query("albumId") albumId: Int): Observable<List<Photo>>
 }

@@ -8,8 +8,8 @@ object Constants {
     // URLs
     const val BASE_URL = "https://jsonplaceholder.typicode.com/"
     const val ALBUM_LIST_PATH = "/albums"
-    const val PHOTO_LIST_PATH = "/photos?albumId={albumId}"
+    const val PHOTO_LIST_PATH = "/photos"
 
     // Bundle Keys
-    const val ALBUM_ID_KEY = "albumIdKey"
+    const val ALBUM_KEY = "albumKey"
 }
