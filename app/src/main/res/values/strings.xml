@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">PhotoGallery</string>
+    // Заголовки
+    <string name="app_name">MusicBox</string>
+    <string name="title_home">Главная</string>
+    <string name="title_library">Библиотека</string>
+    <string name="title_position">Позиция</string>
+    <string name="title_detail">Детали</string>
+
+    //
 </resources>
