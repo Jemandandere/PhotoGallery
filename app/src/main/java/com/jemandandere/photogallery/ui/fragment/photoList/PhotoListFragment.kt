@@ -14,9 +14,7 @@ import com.jemandandere.photogallery.R
 import com.jemandandere.photogallery.adapter.PhotoListAdapter
 import com.jemandandere.photogallery.data.model.Album
 import com.jemandandere.photogallery.data.model.Photo
-import com.jemandandere.photogallery.databinding.AlbumListRemoteFragmentBinding
 import com.jemandandere.photogallery.databinding.PhotoListFragmentBinding
-import com.jemandandere.photogallery.ui.fragment.albumList.remote.AlbumListRemoteViewModel
 import com.jemandandere.photogallery.util.Constants
 
 class PhotoListFragment : Fragment(R.layout.photo_list_fragment) {
@@ -39,21 +37,3 @@ class PhotoListFragment : Fragment(R.layout.photo_list_fragment) {
         viewModel.updatePhotoList(album.id)
     }
 }
-
-/*
-
-override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProvider(this).get(AlbumListRemoteViewModel::class.java)
-        val binding = AlbumListRemoteFragmentBinding.bind(view)
-        val recyclerView = binding.albumRecyclerRemote
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        recyclerView.adapter = AlbumListAdapter()
-        var observer = Observer<List<Album>> {
-            (recyclerView.adapter as AlbumListAdapter).updateData(it)
-        }
-        viewModel.albumList.observe(viewLifecycleOwner, observer)
-        viewModel.updateAlbumList()
-    }
-
- */

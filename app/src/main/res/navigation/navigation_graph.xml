@@ -19,7 +19,7 @@
         android:id="@+id/albumListLocalFragment"
         android:name="com.jemandandere.photogallery.ui.fragment.albumList.local.AlbumListLocalFragment"
         android:label="@string/title_library"
-        tools:layout="@layout/album_list_local_fragment">
+        tools:layout="@layout/album_list_fragment">
         <action
             android:id="@+id/action_albumListLocalFragment_to_photoListFragment"
             app:destination="@id/photoListFragment" />
@@ -28,7 +28,7 @@
         android:id="@+id/albumListRemoteFragment"
         android:name="com.jemandandere.photogallery.ui.fragment.albumList.remote.AlbumListRemoteFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/album_list_remote_fragment">
+        tools:layout="@layout/album_list_fragment">
         <action
             android:id="@+id/action_albumListRemoteFragment_to_photoListFragment"
             app:destination="@id/photoListFragment" />

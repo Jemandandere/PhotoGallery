@@ -44,6 +44,8 @@ class PhotoListAdapter(private val onClick: (Photo) -> Unit) : RecyclerView.Adap
             this.title.text = photo.title
 
             Picasso.get().load(photo.thumbnailUrl)
+                .placeholder(R.drawable.placeholder_load)
+                .error(R.drawable.placeholder_no_image)
                 .into(image)
 
             itemView.setOnClickListener {
@@ -52,44 +54,3 @@ class PhotoListAdapter(private val onClick: (Photo) -> Unit) : RecyclerView.Adap
         }
     }
 }
-
-/*
-
-class AlbumListAdapter(val onClick: (Album) -> Unit) : RecyclerView.Adapter<AlbumListAdapter.AlbumListHolder>() {
-
-    private var albumList = emptyList<Album>()
-
-    fun updateData(albumList: List<Album>) {
-        this.albumList = albumList
-        notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumListHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.album_item, parent, false)
-        return AlbumListHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: AlbumListHolder, position: Int) {
-        holder.bind(albumList[position], onClick)
-    }
-
-    override fun getItemCount(): Int = albumList.size
-
-    class AlbumListHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        private lateinit var album: Album
-
-        private val binding = AlbumItemBinding.bind(view)
-        private val title: TextView = binding.albumItemTitle
-
-        fun bind(album: Album, onClick: (Album) -> Unit) {
-            this.album = album
-            this.title.text = album.title
-            itemView.setOnClickListener {
-                onClick(album)
-            }
-        }
-    }
-}
-
- */
