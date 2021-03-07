@@ -16,8 +16,7 @@ class AlbumListLocalViewModel(application: Application) : AndroidViewModel(appli
     val albumList: MutableLiveData<List<Album>> = MutableLiveData()
 
     private val compositeDisposable = CompositeDisposable()
-    private val dataService =
-        DataService(DataLocalRepository(application), DataLocalRepository(application))
+    private val dataService = DataService(DataLocalRepository(application))
 
     override fun onCleared() {
         super.onCleared()

@@ -9,8 +9,7 @@ import java.io.Serializable
 @Keep
 @Entity(tableName = "album")
 data class Album(
-    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
-    @ColumnInfo val userId: Int,
-    @ColumnInfo val id: Int,
-    @ColumnInfo val title: String
+    @PrimaryKey val id: Int,
+    val userId: Int,
+    val title: String
 ) : Serializable

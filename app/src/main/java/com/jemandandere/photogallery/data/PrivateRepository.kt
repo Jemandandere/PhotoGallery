@@ -6,7 +6,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 interface PrivateRepository {
-    fun check(album: Album) : Single<Boolean>
+    fun isSave(album: Album) : Single<Boolean>
 
     fun insert(album: Album, photoList: List<Photo>) : Completable
 

@@ -11,13 +11,13 @@ import io.reactivex.Single
 @Dao
 interface RoomDao {
     @Query("select * from album")
-    fun getAlbumList(): Observable<List<Album>>
-
-    @Query("select * from photo where albumId = :albumId")
-    fun getPhotoList(albumId: Int): Observable<List<Photo>>
+    fun getAlbumList(): Single<List<Album>>
 
     @Query("select count(*) from album where id = :albumId")
-    fun check(albumId: Int): Single<Int>
+    fun isSave(albumId: Int): Single<Int>
+
+    @Query("select * from photo where albumId = :albumId")
+    fun getPhotoList(albumId: Int): Single<List<Photo>>
 
     @Insert
     fun insert(album: Album): Completable

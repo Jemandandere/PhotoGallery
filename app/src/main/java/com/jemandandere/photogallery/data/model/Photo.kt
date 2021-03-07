@@ -8,10 +8,9 @@ import androidx.room.PrimaryKey
 @Keep
 @Entity(tableName = "photo")
 data class Photo(
-    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
-    @ColumnInfo val albumId: Int,
-    @ColumnInfo val id: Int,
-    @ColumnInfo val title: String,
-    @ColumnInfo val url: String,
-    @ColumnInfo val thumbnailUrl: String
+    @PrimaryKey val id: Int,
+    val albumId: Int,
+    val title: String,
+    val url: String,
+    val thumbnailUrl: String
 )

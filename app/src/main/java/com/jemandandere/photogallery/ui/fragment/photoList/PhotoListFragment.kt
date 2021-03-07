@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jemandandere.photogallery.R
 import com.jemandandere.photogallery.adapter.PhotoListAdapter
-import com.jemandandere.photogallery.data.DataSource
 import com.jemandandere.photogallery.data.model.Album
 import com.jemandandere.photogallery.databinding.PhotoListFragmentBinding
 import com.jemandandere.photogallery.util.Constants
@@ -24,25 +23,23 @@ class PhotoListFragment : Fragment(R.layout.photo_list_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        viewModel = ViewModelProvider(this).get(PhotoListViewModel::class.java)
         val binding = PhotoListFragmentBinding.bind(view)
-        val album : Album = arguments?.getSerializable(Constants.ALBUM_KEY) as Album
-        val dataSource: DataSource = arguments?.getSerializable(Constants.DATA_SOURCE_KEY) as DataSource
-        viewModel.setDataSource(dataSource)
+        val album: Album = arguments?.getSerializable(Constants.ALBUM_KEY) as Album
         val recyclerView = binding.photoRecycler
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        recyclerView.adapter = PhotoListAdapter{
+        recyclerView.adapter = PhotoListAdapter {
             // TODO Change to fullscreen image view
-            Log.d(Constants.TAG, " " + it.albumId + " " + it.id)
+            Log.d(Constants.TAG, "" + it.albumId + " " + it.id)
         }
-        viewModel.photoList.observe(viewLifecycleOwner) {
+        viewModel = ViewModelProvider(this).get(PhotoListViewModel::class.java)
+        viewModel.photoListLiveData.observe(viewLifecycleOwner) {
             (recyclerView.adapter as PhotoListAdapter).updateData(it)
         }
-        viewModel.updatePhotoList(album)
+        // Когда объект сохраняется/удаляется, нужно менять доступные пункты меню
         viewModel.alreadySave.observe(viewLifecycleOwner) {
             requireActivity().invalidateOptionsMenu()
         }
-        viewModel.alreadySavedCheck()
+        viewModel.checkAlbum(album)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -59,13 +56,14 @@ class PhotoListFragment : Fragment(R.layout.photo_list_fragment) {
                 menu.removeItem(R.id.photo_list_menu_delete)
             }
         } else {
+            // На случай фризов или проблем с базой, в самом начале не отображаем ничего
             menu.removeItem(R.id.photo_list_menu_save)
             menu.removeItem(R.id.photo_list_menu_delete)
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.photo_list_menu_save -> viewModel.save()
             R.id.photo_list_menu_delete -> viewModel.delete()
         }

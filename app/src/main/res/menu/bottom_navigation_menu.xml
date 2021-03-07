@@ -4,16 +4,13 @@
     <item
         android:id="@+id/albumListRemoteFragment"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/title_home"
-        android:menuCategory="secondary"/>
+        android:title="@string/title_home"/>
     <item
         android:id="@+id/albumListLocalFragment"
         android:icon="@drawable/ic_baseline_photo_library_24"
-        android:title="@string/title_library"
-        android:menuCategory="secondary"/>
+        android:title="@string/title_library"/>
     <item
         android:id="@+id/geoTrackFragment"
         android:icon="@drawable/ic_baseline_my_location_24"
-        android:title="@string/title_position"
-        android:menuCategory="secondary"/>
+        android:title="@string/title_position"/>
 </menu>

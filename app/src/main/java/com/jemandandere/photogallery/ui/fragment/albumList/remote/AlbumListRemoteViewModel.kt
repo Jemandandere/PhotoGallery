@@ -16,7 +16,7 @@ class AlbumListRemoteViewModel(application: Application) : AndroidViewModel(appl
     val albumList: MutableLiveData<List<Album>> = MutableLiveData()
 
     private val compositeDisposable = CompositeDisposable()
-    private val dataService = DataService(DataRemoteRepository(), DataLocalRepository(application))
+    private val dataService = DataService(DataRemoteRepository())
 
     override fun onCleared() {
         super.onCleared()
@@ -29,6 +29,7 @@ class AlbumListRemoteViewModel(application: Application) : AndroidViewModel(appl
                 albumList.value = it
             }, {
                 Log.d(Constants.TAG, it.localizedMessage ?: Constants.ERROR)
-            }))
+            })
+        )
     }
 }
