@@ -1,13 +1,11 @@
 package com.jemandandere.photogallery.data
 
-import androidx.lifecycle.LiveData
 import com.jemandandere.photogallery.data.model.Album
 import com.jemandandere.photogallery.data.model.Photo
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.Observable
 
 interface DataRepository {
     fun getAlbumList(): Observable<List<Album>>
 
-    fun getPhotoList(albumId: Int): Observable<List<Photo>>
+    fun getPhotoList(album: Album): Observable<List<Photo>>
 }

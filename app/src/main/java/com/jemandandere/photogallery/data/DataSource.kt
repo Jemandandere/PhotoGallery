@@ -1,6 +1,8 @@
 package com.jemandandere.photogallery.data
 
-enum class DataSource {
+import java.io.Serializable
+
+enum class DataSource : Serializable {
     LOCAL,
     REMOTE
 }

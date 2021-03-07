@@ -2,10 +2,10 @@ package com.jemandandere.photogallery
 
 import android.app.Application
 import com.jemandandere.photogallery.util.Constants
-import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class App: Application() {
@@ -34,7 +34,7 @@ class App: Application() {
             .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
 }

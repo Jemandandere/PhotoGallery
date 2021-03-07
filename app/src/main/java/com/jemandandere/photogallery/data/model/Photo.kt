@@ -1,11 +1,17 @@
 package com.jemandandere.photogallery.data.model
 
-import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Keep
+@Entity(tableName = "photo")
 data class Photo(
-    @SerializedName("albumId") val albumId: Int,
-    @SerializedName("id") val id: Int,
-    @SerializedName("title") val title: String,
-    @SerializedName("url") val url: String,
-    @SerializedName("thumbnailUrl") val thumbnailUrl: String
+    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
+    @ColumnInfo val albumId: Int,
+    @ColumnInfo val id: Int,
+    @ColumnInfo val title: String,
+    @ColumnInfo val url: String,
+    @ColumnInfo val thumbnailUrl: String
 )

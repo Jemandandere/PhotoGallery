@@ -42,12 +42,12 @@ class PhotoListAdapter(private val onClick: (Photo) -> Unit) : RecyclerView.Adap
         fun bind(photo: Photo, onClick: (Photo) -> Unit) {
             this.photo = photo
             this.title.text = photo.title
-
+/*
             Picasso.get().load(photo.thumbnailUrl)
                 .placeholder(R.drawable.placeholder_load)
                 .error(R.drawable.placeholder_no_image)
                 .into(image)
-
+*/
             itemView.setOnClickListener {
                 onClick(photo)
             }

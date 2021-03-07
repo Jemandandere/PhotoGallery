@@ -1,10 +1,16 @@
 package com.jemandandere.photogallery.data.model
 
-import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
+@Keep
+@Entity(tableName = "album")
 data class Album(
-    @SerializedName("userId") val userId: Int,
-    @SerializedName("id") val id: Int,
-    @SerializedName("title") val title: String
+    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
+    @ColumnInfo val userId: Int,
+    @ColumnInfo val id: Int,
+    @ColumnInfo val title: String
 ) : Serializable

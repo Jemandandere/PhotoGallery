@@ -1,24 +1,49 @@
 package com.jemandandere.photogallery.logic
 
 import com.jemandandere.photogallery.data.DataRepository
+import com.jemandandere.photogallery.data.PrivateRepository
 import com.jemandandere.photogallery.data.model.Album
 import com.jemandandere.photogallery.data.model.Photo
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.Completable
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
-class DataService(private val repository: DataRepository) {
+class DataService(
+    private val dataRepository: DataRepository,
+    private val privateRepository: PrivateRepository
+) {
     fun loadAlbumList(): Observable<List<Album>> {
-        return repository.getAlbumList()
+        return dataRepository.getAlbumList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .cache()
     }
 
-    fun loadPhotoList(albumId: Int): Observable<List<Photo>> {
-        return repository.getPhotoList(albumId)
+    fun loadPhotoList(album: Album): Observable<List<Photo>> {
+        return dataRepository.getPhotoList(album)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .cache()
+    }
+
+    fun check(album: Album) : Single<Boolean> {
+        return privateRepository.check(album)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun saveAlbum(album: Album, photoList: List<Photo>): Completable {
+        return privateRepository.insert(album, photoList)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    }
+
+    fun deleteAlbum(album: Album, photoList: List<Photo>): Completable {
+        return privateRepository.delete(album, photoList)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jemandandere.photogallery.R
 import com.jemandandere.photogallery.adapter.AlbumListAdapter
+import com.jemandandere.photogallery.data.DataSource
 import com.jemandandere.photogallery.data.model.Album
 import com.jemandandere.photogallery.databinding.AlbumListFragmentBinding
 import com.jemandandere.photogallery.util.Constants
@@ -24,7 +25,10 @@ class AlbumListRemoteFragment : Fragment(R.layout.album_list_fragment) {
         val recyclerView = binding.albumRecycler
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recyclerView.adapter = AlbumListAdapter {
-            findNavController().navigate(R.id.action_albumListRemoteFragment_to_photoListFragment, bundleOf(Constants.ALBUM_KEY to it))
+            findNavController().navigate(
+                R.id.action_albumListRemoteFragment_to_photoListFragment,
+                bundleOf(Constants.ALBUM_KEY to it, Constants.DATA_SOURCE_KEY to DataSource.REMOTE)
+            )
         }
         var observer = Observer<List<Album>> {
             (recyclerView.adapter as AlbumListAdapter).updateData(it)
