@@ -10,10 +10,6 @@ import com.jemandandere.photogallery.R
 
 class GeoPositionFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = GeoPositionFragment()
-    }
-
     private lateinit var viewModel: GeoPositionViewModel
 
     override fun onCreateView(

@@ -1,10 +1,20 @@
 <resources>
-    // Заголовки
+    // Headers
     <string name="app_name">PhotoGallery</string>
     <string name="title_home">Главная</string>
     <string name="title_library">Библиотека</string>
     <string name="title_position">Позиция</string>
     <string name="title_album">Альбом</string>
 
-    //
+    // Default
+    <string name="default_text">omnis neque exercitationem sed dolor atque maxime aut cum</string>
+
+    // Toast
+    <string name="album_save">Альбом успешно сохранён</string>
+    <string name="album_delete">Альбом удалён</string>
+    <string name="menu_save">Сохранить</string>
+    <string name="menu_delete">Удалить</string>
+
+    // Content description
+    <string name="photo_preview">photo preview</string>
 </resources>

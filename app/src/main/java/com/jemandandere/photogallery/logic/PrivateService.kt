@@ -1,8 +1,8 @@
 package com.jemandandere.photogallery.logic
 
 import com.jemandandere.photogallery.data.PrivateRepository
-import com.jemandandere.photogallery.data.model.Album
-import com.jemandandere.photogallery.data.model.Photo
+import com.jemandandere.photogallery.model.Album
+import com.jemandandere.photogallery.model.Photo
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers

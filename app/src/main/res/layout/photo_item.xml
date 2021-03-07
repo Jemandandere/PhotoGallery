@@ -12,30 +12,28 @@
 
         <TextView
             android:id="@+id/photo_item_title"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="@dimen/match_constrains"
+            android:layout_height="@dimen/match_constrains"
+            android:layout_margin="@dimen/margin_standard"
             android:gravity="center"
-            android:minHeight="48dp"
+            android:minHeight="@dimen/recycler_item_min_height"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/photo_item_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="omnis neque exercitationem sed dolor atque maxime aut cum" />
+            tools:text="@string/default_text" />
 
         <ImageView
             android:id="@+id/photo_item_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="@dimen/image_preview_min_height"
+            android:layout_height="@dimen/image_preview_min_height"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginEnd="@dimen/margin_standard"
+            android:layout_marginBottom="@dimen/margin_standard"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/photo_preview"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

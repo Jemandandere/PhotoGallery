@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jemandandere.photogallery.R
-import com.jemandandere.photogallery.data.model.Photo
+import com.jemandandere.photogallery.model.Photo
 import com.jemandandere.photogallery.databinding.PhotoItemBinding
 import com.squareup.picasso.Picasso
 

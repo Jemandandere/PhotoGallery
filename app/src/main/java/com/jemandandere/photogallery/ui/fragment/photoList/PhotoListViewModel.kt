@@ -5,9 +5,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.jemandandere.photogallery.App
+import com.jemandandere.photogallery.R
 import com.jemandandere.photogallery.data.local.DataLocalRepository
-import com.jemandandere.photogallery.data.model.Album
-import com.jemandandere.photogallery.data.model.Photo
+import com.jemandandere.photogallery.model.Album
+import com.jemandandere.photogallery.model.Photo
 import com.jemandandere.photogallery.data.remote.DataRemoteRepository
 import com.jemandandere.photogallery.logic.DataService
 import com.jemandandere.photogallery.logic.PrivateService
@@ -40,10 +42,10 @@ class PhotoListViewModel(application: Application) : AndroidViewModel(applicatio
         this.album = album
         compositeDisposable.add(
             privateService.isSave(album).subscribe({
-                if (it) {
-                    dataService = DataService(DataLocalRepository(getApplication()))
+                dataService = if (it) {
+                    DataService(DataLocalRepository(getApplication()))
                 } else {
-                    dataService = DataService(DataRemoteRepository())
+                    DataService(DataRemoteRepository())
                 }
                 updatePhotoList(album)
                 alreadySave.value = it
@@ -67,7 +69,7 @@ class PhotoListViewModel(application: Application) : AndroidViewModel(applicatio
         compositeDisposable.add(
             privateService.saveAlbum(album, photoList).subscribe({
                 alreadySave.value = true
-                Toast.makeText(getApplication(), "Альбом успешно сохранён", Toast.LENGTH_SHORT)
+                Toast.makeText(getApplication(), getApplication<App>().getString(R.string.album_save), Toast.LENGTH_SHORT)
                     .show()
             }, {
                 Log.d(Constants.TAG, it.localizedMessage ?: Constants.ERROR)
@@ -79,7 +81,7 @@ class PhotoListViewModel(application: Application) : AndroidViewModel(applicatio
         compositeDisposable.add(
             privateService.deleteAlbum(album, photoList).subscribe({
                 alreadySave.value = false
-                Toast.makeText(getApplication(), "Альбом удалён", Toast.LENGTH_SHORT).show()
+                Toast.makeText(getApplication(), getApplication<App>().getString(R.string.album_delete), Toast.LENGTH_SHORT).show()
             }, {
                 Log.d(Constants.TAG, it.localizedMessage ?: Constants.ERROR)
             })

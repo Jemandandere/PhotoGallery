@@ -3,14 +3,13 @@ package com.jemandandere.photogallery.data.local
 import android.content.Context
 import com.jemandandere.photogallery.data.DataRepository
 import com.jemandandere.photogallery.data.PrivateRepository
-import com.jemandandere.photogallery.data.model.Album
-import com.jemandandere.photogallery.data.model.Photo
+import com.jemandandere.photogallery.model.Album
+import com.jemandandere.photogallery.model.Photo
 import io.reactivex.Completable
-import io.reactivex.Observable
 import io.reactivex.Single
 
 class DataLocalRepository(context: Context) : DataRepository, PrivateRepository {
-    val dao : RoomDao = LocalDatabase.getInstance(context).getRoomDao()
+    private val dao : RoomDao = LocalDatabase.getInstance(context).getRoomDao()
 
     override fun getAlbumList(): Single<List<Album>> {
         return dao.getAlbumList()

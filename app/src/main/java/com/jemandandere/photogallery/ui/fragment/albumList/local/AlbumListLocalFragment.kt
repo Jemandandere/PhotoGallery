@@ -5,13 +5,11 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jemandandere.photogallery.R
 import com.jemandandere.photogallery.adapter.AlbumListAdapter
-import com.jemandandere.photogallery.data.model.Album
 import com.jemandandere.photogallery.databinding.AlbumListFragmentBinding
 import com.jemandandere.photogallery.util.Constants
 

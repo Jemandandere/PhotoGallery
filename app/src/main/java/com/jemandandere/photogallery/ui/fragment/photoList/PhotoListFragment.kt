@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jemandandere.photogallery.R
 import com.jemandandere.photogallery.adapter.PhotoListAdapter
-import com.jemandandere.photogallery.data.model.Album
+import com.jemandandere.photogallery.model.Album
 import com.jemandandere.photogallery.databinding.PhotoListFragmentBinding
 import com.jemandandere.photogallery.util.Constants
 

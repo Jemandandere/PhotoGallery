@@ -1,9 +1,8 @@
 package com.jemandandere.photogallery.data.remote
 
-import com.jemandandere.photogallery.data.model.Album
-import com.jemandandere.photogallery.data.model.Photo
+import com.jemandandere.photogallery.model.Album
+import com.jemandandere.photogallery.model.Photo
 import com.jemandandere.photogallery.util.Constants
-import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

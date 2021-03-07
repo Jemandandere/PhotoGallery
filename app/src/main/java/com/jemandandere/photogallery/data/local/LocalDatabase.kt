@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.jemandandere.photogallery.data.model.Album
-import com.jemandandere.photogallery.data.model.Photo
+import com.jemandandere.photogallery.model.Album
+import com.jemandandere.photogallery.model.Photo
 
 @Database(entities = [Album::class, Photo::class], version = 1)
 abstract class LocalDatabase: RoomDatabase() {

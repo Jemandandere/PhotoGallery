@@ -4,9 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.jemandandere.photogallery.data.local.DataLocalRepository
-import com.jemandandere.photogallery.data.model.Album
+import com.jemandandere.photogallery.model.Album
 import com.jemandandere.photogallery.data.remote.DataRemoteRepository
 import com.jemandandere.photogallery.logic.DataService
 import com.jemandandere.photogallery.util.Constants

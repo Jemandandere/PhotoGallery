@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jemandandere.photogallery.R
-import com.jemandandere.photogallery.data.model.Album
+import com.jemandandere.photogallery.model.Album
 import com.jemandandere.photogallery.databinding.AlbumItemBinding
 
 class AlbumListAdapter(private val onClick: (Album) -> Unit) : RecyclerView.Adapter<AlbumListAdapter.AlbumHolder>() {
