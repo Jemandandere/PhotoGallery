@@ -4,28 +4,23 @@ import android.Manifest
 import android.content.*
 import android.content.pm.PackageManager
 import android.location.Location
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.IBinder
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
-import com.google.android.gms.location.*
 import com.jemandandere.photogallery.R
 import com.jemandandere.photogallery.databinding.GeoPositionFragmentBinding
 import com.jemandandere.photogallery.service.GeoPositionService
-import com.jemandandere.photogallery.util.Constants.REQUEST_PERMISSIONS_REQUEST_CODE
-import com.jemandandere.photogallery.util.Constants.TAG
+import com.jemandandere.photogallery.util.Constants
 import com.jemandandere.photogallery.util.Utils
 
 class GeoPositionFragment : Fragment(R.layout.geo_position_fragment),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private lateinit var viewModel: GeoPositionViewModel
     private lateinit var binding: GeoPositionFragmentBinding
 
     private var receiver: Receiver? = null
@@ -48,16 +43,12 @@ class GeoPositionFragment : Fragment(R.layout.geo_position_fragment),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = GeoPositionFragmentBinding.bind(view)
-        viewModel = ViewModelProvider(this).get(GeoPositionViewModel::class.java)
         receiver = Receiver()
 
         binding.geoPositionOnoffButton.setOnClickListener {
-
             if (Utils.requestingLocationUpdates(requireContext())) {
-                //stop
                 geoService!!.removeLocationUpdates()
             } else {
-                //start
                 if (!checkPermissions()) {
                     requestPermissions()
                 } else {
@@ -65,33 +56,16 @@ class GeoPositionFragment : Fragment(R.layout.geo_position_fragment),
                 }
             }
         }
-        setButtonsState(Utils.requestingLocationUpdates(requireContext()))
-
+        updateButtonsState(Utils.requestingLocationUpdates(requireContext()))
     }
 
     override fun onStart() {
         super.onStart()
-
-        PreferenceManager.getDefaultSharedPreferences(requireContext())
-            .registerOnSharedPreferenceChangeListener(this)
-        requireActivity().bindService(
-            Intent(requireContext(), GeoPositionService::class.java), serviceConnection,
-            Context.BIND_AUTO_CREATE
-        )
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
-            receiver!!,
-            IntentFilter(GeoPositionService.ACTION_BROADCAST)
-        )
+        serviceBind()
     }
 
     override fun onStop() {
-        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(receiver!!)
-        if (bound) {
-            requireActivity().unbindService(serviceConnection)
-            bound = false
-        }
-        PreferenceManager.getDefaultSharedPreferences(requireContext())
-            .unregisterOnSharedPreferenceChangeListener(this)
+        serviceUnbind()
         super.onStop()
     }
 
@@ -108,22 +82,28 @@ class GeoPositionFragment : Fragment(R.layout.geo_position_fragment),
             Manifest.permission.ACCESS_FINE_LOCATION
         )
         if (shouldProvideRationale) {
-            // TODO Dialog.show()
-            Toast.makeText(requireContext(), "Разреши, пожалуйста, чё ты", Toast.LENGTH_SHORT)
-                .show()
+            AlertDialog.Builder(requireActivity()).setTitle(getString(R.string.permission_title))
+                .setMessage(getString(R.string.permission_message))
+                .setPositiveButton(getString(R.string.permission_ok)) { dialog, _ ->
+                    dialog.cancel()
+                    ActivityCompat.requestPermissions(
+                        requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                        Constants.REQUEST_PERMISSIONS_REQUEST_CODE
+                    )
+                }.create().show()
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                Constants.REQUEST_PERMISSIONS_REQUEST_CODE
+            )
         }
-        ActivityCompat.requestPermissions(
-            requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-            REQUEST_PERMISSIONS_REQUEST_CODE
-        )
     }
 
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>,
         grantResults: IntArray
     ) {
-        Log.i(TAG, "onRequestPermissionResult")
-        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
+        if (requestCode == Constants.REQUEST_PERMISSIONS_REQUEST_CODE) {
             when {
                 grantResults.isEmpty() -> {
                 }
@@ -131,25 +111,47 @@ class GeoPositionFragment : Fragment(R.layout.geo_position_fragment),
                     geoService!!.requestLocationUpdates()
                 }
                 else -> {
-                    setButtonsState(false)
-                    Toast.makeText(requireContext(), "Зачем запрещаешь?", Toast.LENGTH_SHORT).show()
+                    updateButtonsState(false)
                 }
             }
         }
     }
 
+    private fun serviceBind() {
+        PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .registerOnSharedPreferenceChangeListener(this)
+        requireActivity().bindService(
+            Intent(requireContext(), GeoPositionService::class.java), serviceConnection,
+            Context.BIND_AUTO_CREATE
+        )
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
+            receiver!!,
+            IntentFilter(Constants.GEO_SERVICE_MESSAGE_BROADCAST)
+        )
+    }
+
+    private fun serviceUnbind() {
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(receiver!!)
+        if (bound) {
+            requireActivity().unbindService(serviceConnection)
+            bound = false
+        }
+        PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .unregisterOnSharedPreferenceChangeListener(this)
+    }
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, s: String) {
-        if (s == Utils.KEY_REQUESTING_LOCATION_UPDATES) {
-            setButtonsState(
+        if (s == Constants.REQUESTING_LOCATION_UPDATES_KEY) {
+            updateButtonsState(
                 sharedPreferences.getBoolean(
-                    Utils.KEY_REQUESTING_LOCATION_UPDATES,
+                    Constants.REQUESTING_LOCATION_UPDATES_KEY,
                     false
                 )
             )
         }
     }
 
-    private fun setButtonsState(requestingLocationUpdates: Boolean) {
+    private fun updateButtonsState(requestingLocationUpdates: Boolean) {
         if (requestingLocationUpdates) {
             binding.geoPositionOnoffButton.text = requireContext().getString(R.string.geo_position_stop)
         } else {
@@ -160,7 +162,7 @@ class GeoPositionFragment : Fragment(R.layout.geo_position_fragment),
     private inner class Receiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
             val location: Location? =
-                intent.getParcelableExtra(GeoPositionService.EXTRA_LOCATION)
+                intent.getParcelableExtra(Constants.GEO_SERVICE_LOCATION_KEY)
             if (location != null) {
                 binding.geoPositionPositionText.text = Utils.getLocationText(location)
             }

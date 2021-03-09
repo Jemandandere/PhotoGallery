@@ -22,4 +22,9 @@
     <string name="geo_position_start">Запустить</string>
     <string name="geo_position_stop">Остановить</string>
     <string name="geo_position_stopped">…</string>
+
+    // GeoFragment - Permission Dialog
+    <string name="permission_title">Нужно ваше разрешение</string>
+    <string name="permission_message">Вы сможете послушать музыку,   а мы узнать где вы сейчас</string>
+    <string name="permission_ok">Хорошо</string>
 </resources>
