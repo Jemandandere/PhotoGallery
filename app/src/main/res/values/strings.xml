@@ -9,12 +9,17 @@
     // Default
     <string name="default_text">omnis neque exercitationem sed dolor atque maxime aut cum</string>
 
-    // Toast
+    // Content description
+    <string name="photo_preview">photo preview</string>
+
+    // PhotoFragment
     <string name="album_save">Альбом успешно сохранён</string>
     <string name="album_delete">Альбом удалён</string>
     <string name="menu_save">Сохранить</string>
     <string name="menu_delete">Удалить</string>
 
-    // Content description
-    <string name="photo_preview">photo preview</string>
+    // GeoFragment
+    <string name="geo_position_start">Запустить</string>
+    <string name="geo_position_stop">Остановить</string>
+    <string name="geo_position_stopped">…</string>
 </resources>

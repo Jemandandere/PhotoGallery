@@ -12,4 +12,7 @@ object Constants {
 
     // Bundle Keys
     const val ALBUM_KEY = "albumKey"
+
+    // Service
+    const val REQUEST_PERMISSIONS_REQUEST_CODE = 34
 }
