@@ -2,7 +2,6 @@ package com.jemandandere.photogallery.ui.fragment.photoList
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem

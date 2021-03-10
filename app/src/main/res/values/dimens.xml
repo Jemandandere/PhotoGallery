@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="match_constrains">0dp</dimen>
-    <dimen name="margin_standard">8dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
     <dimen name="recycler_item_min_height">48dp</dimen>
     <dimen name="image_preview_min_height">64dp</dimen>
 </resources>
