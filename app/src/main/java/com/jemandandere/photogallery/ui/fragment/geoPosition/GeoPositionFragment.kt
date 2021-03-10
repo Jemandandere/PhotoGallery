@@ -53,6 +53,7 @@ class GeoPositionFragment : Fragment(R.layout.geo_position_fragment),
                     requestPermissions()
                 } else {
                     geoService!!.requestLocationUpdates()
+                    // TODO Play music
                 }
             }
         }

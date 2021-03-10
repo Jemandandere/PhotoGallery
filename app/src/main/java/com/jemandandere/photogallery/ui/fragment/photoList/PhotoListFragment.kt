@@ -28,8 +28,7 @@ class PhotoListFragment : Fragment(R.layout.photo_list_fragment) {
         val recyclerView = binding.photoRecycler
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recyclerView.adapter = PhotoListAdapter {
-            // TODO Change to fullscreen image view
-            Log.d(Constants.TAG, "" + it.albumId + " " + it.id)
+            // TODO Add fullscreen image view
         }
         viewModel = ViewModelProvider(this).get(PhotoListViewModel::class.java)
         viewModel.photoListLiveData.observe(viewLifecycleOwner) {

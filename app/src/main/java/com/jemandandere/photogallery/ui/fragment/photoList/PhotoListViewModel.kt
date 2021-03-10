@@ -68,6 +68,9 @@ class PhotoListViewModel(application: Application) : AndroidViewModel(applicatio
     fun save() {
         compositeDisposable.add(
             privateService.saveAlbum(album, photoList).subscribe({
+                // TODO Save image
+                // Формально, picasso итак кэширует картинки,
+                //  проблема только с теми превью, которые не попадали на экран
                 alreadySave.value = true
                 Toast.makeText(getApplication(), getApplication<App>().getString(R.string.album_save), Toast.LENGTH_SHORT)
                     .show()
