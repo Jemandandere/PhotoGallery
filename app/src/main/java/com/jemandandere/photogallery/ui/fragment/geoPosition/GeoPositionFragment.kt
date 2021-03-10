@@ -15,6 +15,7 @@ import androidx.preference.PreferenceManager
 import com.jemandandere.photogallery.R
 import com.jemandandere.photogallery.databinding.GeoPositionFragmentBinding
 import com.jemandandere.photogallery.service.GeoPositionService
+import com.jemandandere.photogallery.service.MediaService
 import com.jemandandere.photogallery.util.Constants
 import com.jemandandere.photogallery.util.Utils
 
@@ -48,12 +49,13 @@ class GeoPositionFragment : Fragment(R.layout.geo_position_fragment),
         binding.geoPositionOnoffButton.setOnClickListener {
             if (Utils.requestingLocationUpdates(requireContext())) {
                 geoService!!.removeLocationUpdates()
+                requireActivity().stopService(Intent(requireContext(), MediaService::class.java))
             } else {
                 if (!checkPermissions()) {
                     requestPermissions()
                 } else {
                     geoService!!.requestLocationUpdates()
-                    // TODO Play music
+                    requireActivity().startService(Intent(requireContext(), MediaService::class.java))
                 }
             }
         }

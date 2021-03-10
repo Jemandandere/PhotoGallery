@@ -15,12 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoGallery">
-        <service
-            android:name=".service.GeoPositionService"
-            android:enabled="true"
-            android:exported="true"
-            android:foregroundServiceType="location"/>
-
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".service.GeoPositionService"
+            android:enabled="true"
+            android:foregroundServiceType="location"/>
+        <service
+            android:name=".service.MediaService"
+            android:enabled="true"
+            android:foregroundServiceType="mediaPlayback"/>
     </application>
 
 </manifest>
